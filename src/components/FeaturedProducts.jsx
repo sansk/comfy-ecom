@@ -7,7 +7,26 @@ import Loading from "./Loading";
 import Product from "./Product";
 
 const FeaturedProducts = () => {
-  return <h4>featured products</h4>;
+  const { productsLoading, productsError, featuredProducts } =
+    useProductsContext();
+
+  if (productsLoading) return <Loading />;
+
+  if (productsError) return <Error />;
+
+  return (
+    <FeaturedProductsContainer className="section">
+      <div className="title">
+        <h2>Featured Products</h2>
+        <div className="underline"></div>
+      </div>
+      <div className="section-center featured">
+        {featuredProducts.map((product) => {
+          return <Product key={product.id} {...product} />;
+        })}
+      </div>
+    </FeaturedProductsContainer>
+  );
 };
 
 export default FeaturedProducts;
