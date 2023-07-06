@@ -8,7 +8,37 @@ import {
 
 const cart_reducer = (state, action) => {
   if (action.type === ADD_TO_CART) {
-    return { ...state }
+    const { id, color, amount, product } = action.payload;
+    const tempItem = state.cart.find(item => item.id === id + color)
+
+    console.log("atate: ", state);
+    console.log(action.payload);
+
+    if (tempItem) {
+      const tempCart = state.cart.map(item => {
+        if (item.id === id + color) {
+          let newAmount = item.amount + amount;
+          if (newAmount > item.max) {
+            newAmount = item.max;
+          }
+          return { ...item, amount: newAmount }
+        } else {
+          return item;
+        }
+      });
+      return { ...state, cart: tempCart };
+    } else {
+      const newItem = {
+        id: id + color,
+        name: product.name,
+        color,
+        amount,
+        image: product.images[0].url,
+        price: product.price,
+        max: product.stock
+      }
+      return { ...state, cart: [...state.cart, newItem] };
+    }
   }
 
   if (action.type === CLEAR_CART) {
