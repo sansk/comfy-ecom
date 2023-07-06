@@ -7,7 +7,26 @@ import {
 } from '../actions'
 
 const cart_reducer = (state, action) => {
-  return state
+  if (action.type === ADD_TO_CART) {
+    return { ...state }
+  }
+
+  if (action.type === CLEAR_CART) {
+    return { ...state }
+  }
+
+  if (action.type === COUNT_CART_TOTALS) {
+    return { ...state }
+  }
+
+  if (action.type === REMOVE_CART_ITEM) {
+    return { ...state }
+  }
+
+  if (action.type === TOGGLE_CART_ITEM_AMOUNT) {
+    return { ...state }
+  }
+
   throw new Error(`No Matching "${action.type}" - action type`)
 }
 
