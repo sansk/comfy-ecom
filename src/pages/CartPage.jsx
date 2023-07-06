@@ -7,8 +7,6 @@ import { CartContent, PageHero } from "../components";
 const CartPage = () => {
   const { cart } = useCartContext();
 
-  console.log(cart);
-
   if (cart.length < 1) {
     return (
       <CartPageContainer className="page-100">
@@ -24,7 +22,7 @@ const CartPage = () => {
   return (
     <main>
       <PageHero title="cart" />
-      <CartPageContainer class="page">
+      <CartPageContainer className="page">
         <CartContent />
       </CartPageContainer>
     </main>
