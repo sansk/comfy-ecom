@@ -8,6 +8,7 @@ import {
   Checkout,
   Products,
   SingleProduct,
+  PrivateRoute,
 } from "./pages";
 
 const router = createBrowserRouter([
@@ -38,7 +39,13 @@ const router = createBrowserRouter([
       },
       {
         path: "checkout",
-        element: <Checkout />,
+        element: <PrivateRoute />,
+        children: [
+          {
+            index: true,
+            element: <Checkout />,
+          },
+        ],
       },
       {
         path: "*",

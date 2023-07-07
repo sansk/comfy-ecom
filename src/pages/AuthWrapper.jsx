@@ -1,15 +1,27 @@
-import React from 'react'
-import { useAuth0 } from '@auth0/auth0-react'
-import styled from 'styled-components'
+import React from "react";
+import { useAuth0 } from "@auth0/auth0-react";
+import { Wrapper as AuthContainer } from "../styled-components/AuthWrapper.styles";
 
-const AuthWrapper = () => {
-  return <h4>AuthWrapper Component</h4>
-}
+const AuthWrapper = ({ children }) => {
+  const { isLoading, error } = useAuth0();
 
-const Wrapper = styled.section`
-  min-height: 100vh;
-  display: grid;
-  place-items: center;
-`
+  if (isLoading) {
+    return (
+      <AuthContainer>
+        <div className="loading"></div>
+      </AuthContainer>
+    );
+  }
 
-export default AuthWrapper
+  if (error) {
+    return (
+      <AuthContainer>
+        <h1>{error.message}</h1>
+      </AuthContainer>
+    );
+  }
+
+  return <>{children}</>;
+};
+
+export default AuthWrapper;
