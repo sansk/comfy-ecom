@@ -3,7 +3,8 @@ require('dotenv').config();
 
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
-export async function handler(event, context) {
+async function handler(event, context) {
+    console.log("In handler");
     if (event.body) {
         const { cart, shippingFee, totalAmount } = JSON.parse(event.body);
 
@@ -37,3 +38,5 @@ export async function handler(event, context) {
         }
     }
 }
+
+module.exports = { handler }
