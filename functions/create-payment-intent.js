@@ -4,7 +4,6 @@ require('dotenv').config();
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 async function handler(event, context) {
-    console.log("In handler");
     if (event.body) {
         const { cart, shippingFee, totalAmount } = JSON.parse(event.body);
 
